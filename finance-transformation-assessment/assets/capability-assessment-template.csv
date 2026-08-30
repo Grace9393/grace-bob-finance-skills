@@ -1,0 +1,26 @@
+capability,process_l2,lens,current_level,target_level,weight,evidence,owner
+Budgeting and forecasting,A2,people,2,4,1.0,Forecast built by 14 analysts in parallel; no defined forecasting role,Group FP&A Director
+Budgeting and forecasting,A2,policy,2,4,1.0,No forecast calendar or accuracy target in policy,Group FP&A Director
+Budgeting and forecasting,A2,process,2,4,1.5,Bottom-up only; 6-week cycle; no driver-based model,Group FP&A Director
+Budgeting and forecasting,A2,data,1,4,1.5,Actuals re-keyed from two ERPs into Excel,Group FP&A Director
+Budgeting and forecasting,A2,technology,1,4,1.0,Excel and email; no planning platform,Group FP&A Director
+Management reporting,A3,people,3,4,1.0,Defined reporting team; heavy key-person dependency on two analysts,Head of Reporting
+Management reporting,A3,policy,2,3,1.0,No agreed report catalogue; requests accepted ad hoc,Head of Reporting
+Management reporting,A3,process,2,4,1.5,70% of analyst time on data preparation,Head of Reporting
+Management reporting,A3,data,1,4,2.0,Three competing versions of revenue by region,CFO
+Management reporting,A3,technology,2,4,1.0,BI tool present but fed by manual extracts,IT Finance Lead
+Close and consolidation,B4,people,3,4,1.0,Trained team; overtime every close,Group Controller
+Close and consolidation,B4,policy,3,4,1.0,Close calendar exists; materiality thresholds outdated,Group Controller
+Close and consolidation,B4,process,2,4,2.0,9-day close; 4 days on intercompany,Group Controller
+Close and consolidation,B4,data,2,4,1.5,Intercompany mismatches found late in cycle,Group Controller
+Close and consolidation,B4,technology,2,3,1.0,Consolidation tool in place; reconciliations in Excel,IT Finance Lead
+Invoice processing,C3,people,3,4,1.0,SSC team of 18; high turnover in year one roles,SSC Manager
+Invoice processing,C3,policy,1,4,2.0,No-PO-no-pay not enforced; 38% of invoices arrive without PO,CPO
+Invoice processing,C3,process,2,4,1.5,Manual matching and routing for exceptions,SSC Manager
+Invoice processing,C3,data,2,3,1.0,Supplier master duplicates across two ERPs,Master Data Lead
+Invoice processing,C3,technology,2,4,1.5,OCR deployed; no touchless straight-through path,IT Finance Lead
+Collections and cash application,D4,people,2,4,1.0,Collectors also handle disputes and cash application,AR Manager
+Collections and cash application,D4,policy,2,4,1.0,No behaviour-based dunning ladder; credit limits reviewed annually,AR Manager
+Collections and cash application,D4,process,2,4,1.5,11-day cash application backlog; remittances to shared mailbox,AR Manager
+Collections and cash application,D4,data,2,3,1.0,Customer master incomplete; no dispute reason codes,Master Data Lead
+Collections and cash application,D4,technology,1,4,1.5,No collections workflow tool; spreadsheet worklists,IT Finance Lead

@@ -1,0 +1,9 @@
+metric_id,client_value,as_of,source,driver_volume,driver_description,value_basis,notes
+fin_cost_pct_rev,1.42,2026-06-30,Client FY25 finance cost centre roll-up,25000000,Revenue $2.5B divided by 100 = $ per percentage point of revenue,recurring_annual,Scope reconciled to APQC finance definition; excludes embedded plant controllers
+fin_fte_per_bn,96.0,2026-06-30,HR headcount extract June 2026,212500,Revenue $2.5B x fully loaded cost $85k per FTE = $ per unit of FTE-per-$1B gap,recurring_annual,240 finance FTE across 11 entities
+ap_cost_per_invoice,8.40,2026-06-30,AP cost centre / invoice volume,420000,Annual supplier invoice volume,recurring_annual,Includes T&E processing
+close_days_monthly,9.0,2026-06-30,Close calendar Jan-Jun 2026 average,,,,No direct monetary driver - report as cycle time gap only
+dso,47.0,2026-06-30,AR ageing June 2026,6849315,Average daily revenue = $2.5B / 365,one_time_cash,One-time cash release; recurring benefit is only the carry at cost of capital
+cei,68.0,2026-06-30,Collections report Q2 2026,,,,Higher is better
+ar_over_90,7.8,2026-06-30,AR ageing June 2026,,,,Above the 5% red-flag threshold
+je_automation,61.0,2026-06-30,GL journal source analysis FY25,,,,Manual and upload journals counted as non-automated

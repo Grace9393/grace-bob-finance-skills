@@ -1,0 +1,165 @@
+<!-- ==========================================================================
+     IBM Carbon report - skeleton
+     Every component in the kit, once, with the markup it expects.
+     Copy this file, delete what the deliverable does not need, fill the rest.
+     Paste carbon-report.css into <style> and carbon-report.js into <script>.
+     ========================================================================== -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Client — Deliverable title</title>
+<style>
+/* paste assets/carbon-report.css here, verbatim */
+</style>
+</head>
+<body>
+
+<!-- Sticky top navigation. nav-arrow.off greys out a dead end.
+     secnav is the second row: one link per <h2 id> on the page. -->
+<div class="topnav">
+  <div class="nav-row">
+    <a class="nav-home" href="#top">Engagement name</a>
+    <span class="nav-title">Deliverable title</span>
+    <span class="nav-spacer"></span>
+    <a class="nav-arrow off" href="#">&larr; Previous</a>
+    <a class="nav-arrow" href="next.html">Next &rarr;</a>
+  </div>
+  <div class="nav-row secnav">
+    <a href="#s1">1 · Section</a>
+    <a href="#s2">2 · Section</a>
+    <a href="#s3">3 · Section</a>
+  </div>
+</div>
+
+<div class="page" id="top">
+
+  <!-- Title block. eyebrow is the small blue kicker above the title. -->
+  <div class="hero">
+    <div class="hero-in">
+      <div class="eyebrow">Client · Process · Delivery centre</div>
+      <h1>Deliverable title</h1>
+      <p class="muted">One line saying what this is and what it is drawn from.</p>
+    </div>
+  </div>
+
+  <!-- Standfirst. One paragraph, no bullets. -->
+  <div class="summary-box">
+    <strong>In short.</strong> The finding a reader must leave with, stated once.
+  </div>
+
+  <!-- KPI tiles. .num animates by count-up if it starts with a number.
+       Keep to 3-6 tiles; a seventh reads as a table. -->
+  <div class="kpi-strip">
+    <div class="kpi"><div class="num">219</div><div class="lbl">What the number counts</div></div>
+    <div class="kpi"><div class="num">55</div><div class="lbl">Second measure</div></div>
+    <div class="kpi"><div class="num">71%</div><div class="lbl">Third measure</div></div>
+  </div>
+
+  <h2 id="s1">1 · Section heading</h2>
+
+  <p>Body copy. Blue square bullets come from a plain <code>ul</code>.</p>
+  <ul>
+    <li>First point</li>
+    <li>Second point</li>
+  </ul>
+
+  <!-- Grey panel for a self-contained aside. -->
+  <div class="block">
+    <div class="block-title">Panel title</div>
+    <p>Something that stands apart from the run of the page.</p>
+  </div>
+
+  <!-- Tables get a solid blue header and a live filter box above them
+       once the JS runs, if the table is long enough to need one. -->
+  <table>
+    <thead><tr><th>Column</th><th>Column</th><th>Column</th></tr></thead>
+    <tbody>
+      <tr><td>Cell</td><td>Cell</td><td><span class="tag tag-red">Critical</span></td></tr>
+      <tr><td>Cell</td><td>Cell</td><td><span class="tag tag-amber">High</span></td></tr>
+      <tr><td>Cell</td><td>Cell</td><td><span class="tag tag-green">Resolved</span></td></tr>
+      <tr><td>Cell</td><td>Cell</td><td><span class="tag tag-blue">Applicable</span></td></tr>
+      <tr><td>Cell</td><td>Cell</td><td><span class="tag tag-purple">Future</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="s2">2 · Findings</h2>
+
+  <!-- Finding card. Add .critical for the red left rule. -->
+  <div class="pain-card critical">
+    <div class="pain-title">P1 · What is wrong</div>
+    <p>What it costs, and what evidence says so.</p>
+    <span class="tag tag-red">Critical risk</span>
+  </div>
+
+  <div class="pain-card">
+    <div class="pain-title">P2 · What is wrong</div>
+    <p>Amber by default.</p>
+  </div>
+
+  <!-- Recommendation card. enh-meta is the thin metadata strip. -->
+  <div class="enh-card">
+    <div class="enh-title">E1 · What to do about it</div>
+    <div class="enh-meta"><span>Owner</span><span>Replaces: today's step</span><span>Fixes: P1</span></div>
+    <p>The recommendation, in the same voice as the finding.</p>
+  </div>
+
+  <!-- Legend, where cards or bars carry a colour code. -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#0F62FE"></div><span>Meaning</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#198038"></div><span>Meaning</span></div>
+  </div>
+
+  <!-- Maturity bars. data-w is the fill width in px against a 120px track;
+       the JS zeroes it, then animates to data-w when the bar scrolls in. -->
+  <p>Capability <span class="bar-bg"><span class="bar" data-w="84"></span></span> 70%</p>
+  <p>Capability <span class="bar-bg"><span class="bar" data-w="36"></span></span> 30%</p>
+
+  <div class="pagebreak"></div>
+
+  <h2 id="s3">3 · Roadmap</h2>
+
+  <!-- Waves. w2 and w3 shift the border and title colour down the blue ramp. -->
+  <div class="wave">
+    <div class="wave-t">Wave 1 — Standardise</div>
+    <div class="wave-m">Months 0–3 · Process and people · near-zero technology spend</div>
+    <p>What this wave does and why it comes first.</p>
+  </div>
+  <div class="wave w2">
+    <div class="wave-t">Wave 2 — Optimise</div>
+    <div class="wave-m">Months 3–9</div>
+    <p>Body.</p>
+  </div>
+  <div class="wave w3">
+    <div class="wave-t">Wave 3 — Automate</div>
+    <div class="wave-m">Months 9–18</div>
+    <p>Body.</p>
+  </div>
+
+  <!-- Diagram. The JS adds zoom chips and click-drag panning to .svgwrap.
+       Inline the SVG - a linked file breaks the single-file rule. -->
+  <div class="svgwrap">
+    <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Describe the diagram for a reader who cannot see it">
+      <!-- diagram -->
+    </svg>
+  </div>
+
+  <!-- Provenance. Say what the document was built from, and what was missing. -->
+  <div class="source-box">
+    <strong>Source coverage.</strong> Name the documents, the date, and any part of
+    the source that could not be read. An undeclared gap is the defect a reader
+    cannot detect.
+  </div>
+
+  <hr class="rule" />
+  <div class="footer">Client · Deliverable · Delivery centre</div>
+</div>
+
+<a class="totop" href="#top">&uarr;</a>
+
+<script>
+/* paste assets/carbon-report.js here, verbatim */
+</script>
+</body>
+</html>

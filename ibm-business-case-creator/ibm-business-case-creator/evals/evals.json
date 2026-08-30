@@ -1,0 +1,44 @@
+{
+  "skill_name": "ibm-business-case-creator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I need to build a business case for our CFO to justify automating invoice processing. We have 3 staff in procurement spending 60% of their time manually processing invoices — about 500 per month, each taking roughly 15 minutes. Our fully loaded staff cost is £35k per person per year. I'm looking at an automation tool that costs £80k to implement and £12k per year to run. Can you help me build the business case?",
+      "expected_output": "A structured business case document with quantified problem statement, financial model showing costs and benefits, payback period calculation, risk mitigation, and executive summary",
+      "files": [],
+      "expectations": [
+        "The output quantifies the current cost of manual invoice processing in annual monetary terms (e.g. FTE cost calculation)",
+        "The output calculates a break-even or payback period based on implementation cost vs annual savings",
+        "The output includes both implementation costs and annual run costs in a financial model",
+        "The output addresses at least one risk or stakeholder concern with a specific mitigation strategy",
+        "The output includes an executive summary or equivalent one-page overview section"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We're a mid-sized retailer and I'm trying to convince our board to invest in AI for our customer service operation. We handle 10,000 support tickets per month with 8 full-time agents at £28k each. I've been quoted £120k to implement an AI tool that claims to handle 40% of tickets automatically, with £15k per year ongoing support costs. Help me put together a convincing business case that addresses board-level concerns.",
+      "expected_output": "A persuasive business case targeting board-level decision-makers, with annual savings from ticket automation, ROI analysis, payback timeline, risk framing, and identification of board member concerns",
+      "files": [],
+      "expectations": [
+        "The output calculates the annual cost saving from automating 40% of tickets (based on 8 FTE at £28k)",
+        "The output provides a payback period or break-even timeline",
+        "The output identifies board-level stakeholders and addresses their likely concerns or objections",
+        "The output uses conservative language or flags assumptions (e.g. acknowledges the 40% automation claim may not be achieved)",
+        "The output includes a section on implementation risk and how it is mitigated"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Help me build a business case to replace our Excel-based management reporting with Power BI. Currently each management report takes 2 full days to produce, we produce 20 reports per month, and the analyst doing this work earns £45k per year. Power BI Enterprise costs £50k per year as a SaaS subscription. Our CFO is skeptical and wants to see hard numbers and a clear ROI before he'll approve anything.",
+      "expected_output": "A rigorous, numbers-driven business case directed at a skeptical CFO, quantifying reporting time costs, net annual benefit after tool cost, payback period, and addressing typical CFO objections about ROI and risk",
+      "files": [],
+      "expectations": [
+        "The output calculates the current annual cost of Excel-based reporting in FTE terms (days per month x analyst salary)",
+        "The output calculates net annual benefit (savings minus £50k Power BI cost)",
+        "The output provides a specific payback period figure",
+        "The output directly addresses the CFO's skepticism — naming ROI, hard numbers, or risk concerns",
+        "The output suggests a phased approach, pilot, or quick win to reduce perceived risk"
+      ]
+    }
+  ]
+}

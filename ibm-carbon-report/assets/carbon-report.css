@@ -1,0 +1,264 @@
+/* ==========================================================================
+   IBM Carbon report kit - stylesheet
+   Lifted verbatim from the NBS Manila O2C artifact house format, where it
+   appears byte-identical across the pitch deck and the SOP analysis pages.
+
+   Design system : IBM Carbon v11 colour tokens
+   Typeface      : IBM Plex Sans, falling back to Segoe UI / system-ui
+   Colour mode   : light only, by design - these are printed and PDF'd for
+                   clients, and a dark variant would fork the palette for no
+                   audience. Do not add prefers-color-scheme here.
+
+   Do not edit token values. If a deliverable needs a new component, add a
+   class below the tokens rather than reaching into the palette.
+   ========================================================================== */
+
+:root{
+    --blue60:#0F62FE; --blue70:#0043CE; --blue80:#002D9C; --blue100:#001141;
+    --blue20:#CFE0FF; --cyan10:#E5F6FF; --cyan20:#BAE6FF; --cyan30:#82CFFF;
+    --red60:#DA1E28; --red10:#FFF1F1; --green60:#198038; --green10:#DEFBE6;
+    --mag60:#D02670; --amber:#8E6A00; --amber10:#FCF4D6;
+    --g100:#161616; --g80:#393939; --g70:#525252; --g60:#6F6F6F;
+    --g40:#A8A8A8; --g30:#D0D5DD; --g20:#E0E0E0; --g10:#F4F4F4; --white:#fff;
+    --plex:'IBM Plex Sans','IBM Plex Sans Text',-apple-system,'Segoe UI',system-ui,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--plex);font-size:14.5px;font-weight:400;line-height:1.6;
+       color:var(--g80);background:var(--white);padding:0 0 0;-webkit-font-smoothing:antialiased}
+  .page{max-width:900px;margin:0 auto;padding:0 32px}
+
+  /* ---- title block, mirroring the deck's title treatment ---- */
+  .hero{border-bottom:1px solid var(--g20);padding:38px 0 26px;margin-bottom:24px;background:var(--white)}
+  .hero-in{max-width:900px;margin:0 auto;padding:0 32px}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue60);
+           font-weight:600;margin-bottom:12px}
+  .hero h1{font-size:34px;font-weight:300;line-height:1.22;color:var(--g100);letter-spacing:-.01em}
+  .hero .sub{margin-top:12px;font-size:16px;font-weight:300;color:var(--g60);max-width:70ch}
+  .hero .rule{width:56px;height:3px;background:var(--blue60);margin-top:20px}
+
+  /* ---- section headings: blue, light weight ---- */
+  h2{font-size:25px;font-weight:300;color:var(--blue60);margin:38px 0 6px;padding:0;
+     letter-spacing:-.005em;scroll-margin-top:96px;border:0}
+  h2+p,h2+.muted{color:var(--g60);font-weight:300;font-size:15px;margin-bottom:14px}
+  h3{font-size:16px;font-weight:600;color:var(--g100);margin:22px 0 8px}
+  p{margin-bottom:11px}
+  a{color:var(--blue60);text-decoration:none;border-bottom:1px solid var(--blue20)}
+  a:hover{border-bottom-color:var(--blue60)}
+  strong{font-weight:600;color:var(--g100)}
+  em{font-style:normal;color:var(--blue70)}
+  code{background:var(--g10);border:1px solid var(--g20);border-radius:2px;padding:1px 5px;
+       font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;color:var(--blue80)}
+  hr{border:none;border-top:1px solid var(--g20);margin:32px 0}
+  .muted{color:var(--g60);font-size:13px;font-weight:300}
+
+  /* ---- blue square bullets ---- */
+  ul{list-style:none;padding-left:0;margin-bottom:12px}
+  li{position:relative;padding-left:19px;margin-bottom:7px}
+  li::before{content:"";position:absolute;left:2px;top:.60em;width:6px;height:6px;
+             background:var(--blue60)}
+
+  /* ---- callout + cards ---- */
+  .summary-box{background:var(--cyan10);border-left:5px solid var(--blue60);
+       padding:18px 22px;margin-bottom:18px;font-size:15px;font-weight:300;color:var(--g100)}
+  .source-box{background:var(--white);border:1px solid var(--g30);border-left:5px solid var(--g40);
+       padding:15px 18px;margin-bottom:26px;font-size:13px;line-height:1.6;color:var(--g70)}
+  .source-box strong{color:var(--g100)}
+  .block{background:var(--white);border:1px solid var(--blue60);border-radius:14px;
+       padding:18px 22px;margin-bottom:14px}
+  .block-title{font-size:17px;font-weight:400;color:var(--blue60);margin-bottom:9px}
+
+  /* ---- KPI tiles: cyan bg, oversized light numerals ---- */
+  .kpi-strip{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 28px}
+  .kpi{flex:1 1 150px;background:var(--cyan10);border-radius:10px;padding:20px 14px;
+       text-align:center;transition:background .2s ease,transform .2s ease}
+  .kpi:hover{background:var(--cyan20);transform:translateY(-2px)}
+  .kpi .num{font-size:36px;font-weight:300;color:var(--blue60);line-height:1.05;
+       letter-spacing:-.02em}
+  .kpi .lbl{font-size:13px;font-weight:400;color:var(--blue70);margin-top:8px;line-height:1.35}
+
+  /* ---- tables: solid blue header ---- */
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:14px 0 24px;background:var(--white)}
+  thead th{background:var(--blue60);color:var(--white);padding:10px 12px;text-align:left;
+       font-weight:600;font-size:12.5px;border:1px solid var(--blue60)}
+  td{padding:9px 12px;vertical-align:top;border:1px solid var(--g30);color:var(--g80)}
+  tbody tr{transition:background .14s ease}
+  tbody tr:hover{background:var(--cyan10)}
+
+  /* ---- tags ---- */
+  .tag{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 9px;
+       border-radius:2px;white-space:nowrap}
+  .tag-red{background:var(--red10);color:var(--red60);border:1px solid #FFD7D9}
+  .tag-amber{background:var(--amber10);color:var(--amber);border:1px solid #F1E0A8}
+  .tag-green{background:var(--green10);color:var(--green60);border:1px solid #A7F0BA}
+  .tag-blue{background:var(--cyan10);color:var(--blue70);border:1px solid var(--blue20)}
+  .tag-purple{background:#F6F2FF;color:#6929C4;border:1px solid #E8DAFF}
+
+  /* ---- finding / enhancement cards ---- */
+  .pain-card,.enh-card{background:var(--white);border:1px solid var(--g30);
+       border-left:4px solid var(--blue60);padding:15px 19px;margin-bottom:12px;
+       transition:border-color .2s ease,box-shadow .2s ease}
+  .pain-card:hover,.enh-card:hover{box-shadow:0 2px 10px rgba(15,98,254,.14)}
+  .pain-card.critical{border-left-color:var(--red60);background:var(--red10)}
+  .pain-card.low{border-left-color:var(--green60);background:var(--green10)}
+  .pain-title{font-weight:600;font-size:14.5px;margin-bottom:6px;color:var(--g100)}
+  .enh-card{border-left-color:var(--blue70)}
+  .enh-title{font-weight:600;font-size:14.5px;color:var(--blue70);margin-bottom:6px}
+  .enh-meta{font-size:12px;color:var(--g60);margin-bottom:9px;display:flex;gap:8px;flex-wrap:wrap}
+  .enh-meta span{background:var(--g10);border:1px solid var(--g20);padding:2px 9px;border-radius:2px}
+
+
+  /* ---- hover annotation ----
+     A dotted term opens the sourced detail behind it. The bubble is a REAL
+     element, never a title= or data- attribute: attribute text escapes the
+     provenance audits, and unaudited text has no place on a client artifact.
+
+       <span class="tip" tabindex="0">583 accounts<span class="tipbox">lifted
+         detail from the source <span class="src">D2</span></span></span>
+
+     tabindex makes it keyboard-reachable. Add .flip to a bubble near the right
+     edge so it opens leftward. Print drops bubble and underline below - the
+     printed sentence must stand on its own without them. ---- */
+  .tip{position:relative}
+  @media screen{ .tip{border-bottom:1.5px dotted var(--blue60);cursor:help} }
+  .tipbox{display:none;position:absolute;z-index:40;bottom:calc(100% + 9px);left:0;
+          width:300px;max-width:74vw;background:var(--g100);color:var(--white);
+          font-size:12.5px;font-weight:400;line-height:1.5;letter-spacing:0;
+          padding:11px 13px;border-radius:4px;text-align:left;white-space:normal;
+          box-shadow:0 4px 14px rgba(22,22,22,.25)}
+  .tipbox::after{content:"";position:absolute;top:100%;left:18px;
+                 border:6px solid transparent;border-top-color:var(--g100)}
+  .tip:hover .tipbox,.tip:focus-within .tipbox,.tip:focus .tipbox{display:block}
+  .tipbox strong{color:var(--white)}
+  .tipbox .src{color:var(--cyan30);background:none}
+  .tipbox.flip{left:auto;right:0}
+  .tipbox.flip::after{left:auto;right:18px}
+
+  /* ---- phase line ----
+     A horizontal arc of phases whose widths are their real durations - a bar
+     that lies about time is worse than no bar. Set each .ph's flex to the
+     phase's length (in months): flex:3 / flex:6 / flex:9 for a 3-6-9 arc.
+     On a one-pager wrap the whole thing in .screen-only. ---- */
+  .phaseline{display:flex;gap:3px;margin:10px 0 2px}
+  .ph{color:var(--white);padding:8px 12px;border-radius:2px}
+  .ph .ph-t{display:block;font-weight:600;font-size:13px}
+  .ph .ph-m{display:block;font-size:11.5px;opacity:.8;margin-top:1px}
+  .ph.p1{background:var(--blue60)}
+  .ph.p2{background:var(--blue70)}
+  .ph.p3{background:var(--blue80)}
+
+  /* ---- call to action ----
+     For a page that links to a companion document. Radius is 2px to match the
+     kit's tags rather than Carbon's square button, because internal consistency
+     reads better than half-applied fidelity. .btnrow is hidden in print below:
+     a button on paper is an instruction the reader cannot follow. ---- */
+  .btnrow{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue60);
+       color:var(--white);font-size:14px;font-weight:600;letter-spacing:.01em;
+       padding:11px 18px;border:1px solid var(--blue60);border-radius:2px;
+       text-decoration:none;line-height:1.2;
+       transition:background .15s ease,border-color .15s ease}
+  .btn:hover{background:var(--blue70);border-color:var(--blue70)}
+  .btn:focus-visible{outline:2px solid var(--blue80);outline-offset:2px}
+  .btn.secondary{background:transparent;color:var(--blue60)}
+  .btn.secondary:hover{background:var(--cyan10)}
+  .btn-note{font-size:12.5px;color:var(--g60)}
+
+  .legend{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0 20px;font-size:13px}
+  .legend-item{display:flex;align-items:center;gap:7px}
+  .legend-dot{width:11px;height:11px;flex-shrink:0}
+
+  /* ---- waves ---- */
+  .wave{background:var(--white);border:1px solid var(--blue60);border-radius:14px;
+        padding:18px 22px;margin-bottom:14px;transition:box-shadow .2s ease}
+  .wave:hover{box-shadow:0 3px 14px rgba(15,98,254,.15)}
+  .wave.w2{border-color:var(--blue70)} .wave.w3{border-color:var(--cyan30)}
+  .wave-t{font-size:19px;font-weight:300;color:var(--blue60);margin-bottom:5px}
+  .wave.w2 .wave-t{color:var(--blue70)} .wave.w3 .wave-t{color:var(--blue80)}
+  .wave-m{font-size:12.5px;color:var(--g60);margin-bottom:11px}
+
+  /* ---- maturity bars ---- */
+  .bar-bg{display:inline-block;width:120px;height:10px;background:var(--g20);
+        vertical-align:middle;margin-right:9px;overflow:hidden}
+  .bar{display:block;height:10px;background:var(--blue60);transition:width 1s cubic-bezier(.2,.9,.3,1)}
+
+  /* ---- nav ---- */
+  .topnav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);
+        border-bottom:1px solid var(--g20);backdrop-filter:blur(8px);padding:8px 0 6px}
+  .nav-row{max-width:900px;margin:0 auto;padding:0 32px;display:flex;align-items:baseline;
+        gap:11px;flex-wrap:wrap;font-size:12.5px;line-height:1.9}
+  .nav-row a{color:var(--g60);border:0}
+  .nav-row a:hover{color:var(--blue60)}
+  .nav-home{font-weight:600;color:var(--g100)!important}
+  .nav-title{color:var(--g60)}
+  .nav-spacer{flex:1 1 auto}
+  .nav-arrow{padding:1px 9px;border:1px solid var(--g30)!important;background:var(--white);
+        white-space:nowrap;border-radius:2px}
+  .nav-arrow.off{opacity:.32;pointer-events:none}
+  .secnav{border-top:1px solid var(--g20);margin-top:5px;padding-top:5px}
+  .secnav a{padding:2px 10px;white-space:nowrap;font-size:12px;border:1px solid transparent!important;
+        transition:all .15s ease}
+  .secnav a:hover{background:var(--cyan10)}
+  .secnav a.active{background:var(--blue60);color:var(--white)!important}
+  .secnav a b{color:var(--blue60);font-weight:600;margin-right:4px}
+  .secnav a.active b{color:var(--white)}
+  .totop{display:block;text-align:right;font-size:12px;margin:-2px 0 10px}
+  .totop a{color:var(--g40);border:0} .totop a:hover{color:var(--blue60)}
+
+  /* ---- interactive controls ---- */
+  .ctl{display:none;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0 14px}
+  .ctl.on{display:flex}
+  .chip{font-size:12px;padding:3px 13px;border:1px solid var(--g30);background:var(--white);
+        color:var(--g80);cursor:pointer;font-family:inherit;border-radius:2px;transition:all .15s ease}
+  .chip:hover{border-color:var(--blue60);color:var(--blue60)}
+  .chip[aria-pressed="true"]{background:var(--blue60);color:var(--white);border-color:var(--blue60)}
+  .ctl-lbl{font-size:11px;color:var(--g60);letter-spacing:.06em;text-transform:uppercase;
+        font-weight:600}
+  .tfilter{font:inherit;font-size:12.5px;padding:4px 12px;border:1px solid var(--g30);
+        background:var(--white);color:var(--g80);min-width:200px;border-radius:2px}
+  .tfilter::placeholder{color:var(--g40)}
+  .hidden-row{display:none}
+  .count{font-size:11.5px;color:var(--g60)}
+
+  h2.collapsible{cursor:pointer;position:relative;padding-right:30px}
+  h2.collapsible::after{content:"\2212";position:absolute;right:2px;top:0;color:var(--blue60);
+        font-size:22px;font-weight:300}
+  h2.collapsible.closed::after{content:"\002B"}
+
+  .svgwrap{position:relative;overflow:auto;border:1px solid var(--g30);border-radius:8px;
+        padding:12px;background:var(--white);margin:14px 0}
+  .svgwrap svg{transition:transform .2s ease;transform-origin:0 0}
+  .zoomctl{display:none;gap:7px;margin-bottom:8px}.zoomctl.on{display:flex}
+
+  .footer{border-top:1px solid var(--g20);margin-top:48px;padding:14px 0 30px;
+        font-size:12px;color:var(--g60);display:flex;justify-content:space-between;gap:16px}
+
+  .reveal{transition:opacity .5s ease,transform .5s ease}
+  body.anim .reveal:not(.in){opacity:0;transform:translateY(10px)}
+
+  @media print{
+    .topnav,.totop,.ctl,.zoomctl{display:none!important}
+    body{font-size:10.5px} .reveal{opacity:1!important;transform:none!important}
+    .bar{transition:none!important}
+    table,.block,.pain-card,.enh-card,.wave,.kpi{break-inside:avoid}
+    thead th,.kpi,.summary-box{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .btnrow{display:none!important}
+    .tipbox{display:none!important}
+    .tip{border-bottom:none!important;cursor:auto}
+    .pagebreak{page-break-before:always}
+    @page{size:A4;margin:12mm}
+  }
+  @media (max-width:640px){
+    .hero h1{font-size:26px}.page,.hero-in,.nav-row{padding:0 18px}.kpi .num{font-size:29px}
+  }
+
+/* ==========================================================================
+   print-correctness addendum
+   Found by rendering a deliverable to PDF headlessly: the collapse marker that
+   the script adds to every h2[id] was printing as a stray minus sign at the
+   foot of each section. The kit's own print block hides .topnav, .totop, .ctl
+   and .zoomctl but never covered this one.
+   ========================================================================== */
+@media print{
+  h2.collapsible::after{display:none!important}
+  h2.collapsible{padding-right:0;cursor:auto}
+}
