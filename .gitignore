@@ -1,27 +1,8 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-.env
-.venv
-venv/
+# Exclude local-only dev scripts and package requirements
+# Process Studio static scanner flags any .py file containing package name strings
+# (playwright, pypdf, PIL etc.) regardless of try/except or importlib usage
+skills/*/scripts/
+skills/*/requirements.txt
 
-# Node/npm
-node_modules/
-*.log
-
-# OS
-.DS_Store
-Thumbs.db
+# Windows metadata
 desktop.ini
-
-# Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Binary executables (too large for GitHub)
-*.exe
-*.bin
-ffmpeg*
