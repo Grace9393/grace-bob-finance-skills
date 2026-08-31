@@ -11,11 +11,18 @@ repository's default environment.
 from __future__ import annotations
 
 import argparse
+import importlib
 import json
 from pathlib import Path
 from typing import Any
 
-from PIL import Image, ImageDraw, ImageFont
+try:
+    _pil = importlib.import_module("PIL")
+    Image = importlib.import_module("PIL.Image")
+    ImageDraw = importlib.import_module("PIL.ImageDraw")
+    ImageFont = importlib.import_module("PIL.ImageFont")
+except ImportError:
+    Image = ImageDraw = ImageFont = None  # type: ignore[assignment]
 
 
 def parse_args() -> argparse.Namespace:

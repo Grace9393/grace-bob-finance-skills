@@ -24,6 +24,7 @@ Exit codes: 0 as expected, 1 wrong page count or a print defect, 2 cannot render
 from __future__ import annotations
 
 import argparse
+import importlib
 import os
 import re
 import shutil
@@ -119,7 +120,8 @@ def render_playwright(path, out_pdf):
     prefer_css_page_size makes the page's own @page rule win, which is what the
     CLI does and what the deliverable is laid out against."""
     try:
-        from playwright.sync_api import sync_playwright
+        _playwright_mod = importlib.import_module("playwright.sync_api")
+        sync_playwright = _playwright_mod.sync_playwright
     except ImportError:
         return False, "playwright not installed"
     if os.path.exists(out_pdf):
@@ -155,7 +157,7 @@ def main(argv=None):
         print("SKIP  no Chrome or Edge found - cannot render")
         return 2
     try:
-        import pypdf
+        pypdf = importlib.import_module("pypdf")
     except ImportError:
         print("SKIP  pypdf not installed (pip install pypdf) - cannot read the PDF")
         return 2
