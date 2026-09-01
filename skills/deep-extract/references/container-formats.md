@@ -4,6 +4,15 @@ Reference for `deep-extract`. Each section says where embedded content lives,
 what the extractor does with it, and what it cannot do — so "not in the output"
 can be told apart from "not supported".
 
+
+**Scope.** This describes how ordinary business documents store the files people
+attach to them, so that "not in the output" can be told apart from "not
+supported". The extractor reads what a document already contains. It does not
+open password-protected packages, does not read macro source, and does not
+work around any protection a file carries — where it meets those, it copies the
+part out untouched and records that it did.
+
+
 ---
 
 ## 1. OOXML — .docx / .xlsx / .pptx (and the macro-enabled variants)
@@ -22,7 +31,7 @@ Each embedding is wired into the body through a relationship:
 ```xml
 <w:object>
   <v:shape><v:imagedata r:id="rId7"/></v:shape>          <!-- the icon -->
-  <o:OLEObject ProgID="Word.Document.12" r:id="rId8"/>   <!-- the payload -->
+  <o:OLEObject ProgID="Word.Document.12" r:id="rId8"/>   <!-- the embedded file -->
 </w:object>
 ```
 
@@ -44,8 +53,9 @@ footnotes/endnotes, comments with author and date, tracked insertions and
 deletions, hyperlink targets, image alt text, text boxes, `w:sdt` content
 controls, all document properties.
 
-**Not extracted:** field *results* that Word never cached, VBA source in
-`vbaProject.bin` (the binary is saved, not decompiled), OOXML chart series
+**Not extracted:** field *results* that Word never cached, the contents of
+`vbaProject.bin` (the macro project is copied out as-is and never read),
+OOXML chart series
 values (the chart XML is saved), ink annotations.
 
 ### The 1,048,576-row problem
@@ -60,12 +70,13 @@ before suspecting loss.
 
 ## 2. OLE compound files — .doc / .xls / .ppt / .msg / oleObject*.bin
 
-Magic `D0 CF 11 E0 A1 B1 1A E1`. A little FAT filesystem of streams.
+These files begin `D0 CF 11 E0 A1 B1 1A E1` and hold a small internal
+directory of named streams.
 
 | Stream | Holds | Handling |
 |---|---|---|
 | `\x01Ole10Native`, `Package` | an arbitrary embedded file with its original name | unwrapped, then re-dispatched |
-| `CONTENTS` | Visio/Equation and similar payloads | passed through if it carries a known magic |
+| `CONTENTS` | Visio/Equation and similar embedded content | copied out when the format is recognised |
 | `WordDocument` + `0Table`/`1Table` | Word 97-2003 | text via the piece table |
 | `Workbook` / `Book` | Excel 97-2003 | BIFF8 shared-string table + label cells |
 | `PowerPoint Document` | PowerPoint 97-2003 | TextBytes/TextChars atoms |
@@ -76,16 +87,17 @@ Magic `D0 CF 11 E0 A1 B1 1A E1`. A little FAT filesystem of streams.
 ### Ole10Native layout
 
 `DWORD` total size · `WORD` flags · ASCIIZ label · ASCIIZ original path ·
-`DWORD` unknown · `DWORD` temp-path length + path · `DWORD` payload size ·
-payload. If the header does not parse, the extractor scans the first 4 KB for a
-`PK`/`%PDF`/`{\rtf`/CFB magic and cuts from there.
+`DWORD` unknown · `DWORD` temp-path length + path · `DWORD` content size ·
+the embedded file. If those fields do not parse, the extractor looks in the
+first 4 KB for the leading bytes of a format it knows (OOXML, PDF, RTF or an
+OLE compound file) and copies from that point.
 
 **Limits.** Legacy `.doc` fast-saved with an unusual piece table may yield
 partial text; `.xls` shared strings spilling across `CONTINUE` records are read
 to the first spill boundary; a `.msg` **attached to another .msg** is a nested
 *storage*, and its text fields are read in place but it is not re-serialised
-into a standalone `.msg` file. Encrypted OLE (`EncryptedPackage`) is saved but
-not decrypted.
+into a standalone `.msg` file. A password-protected package (`EncryptedPackage`) is copied out
+as-is and never opened.
 
 ---
 
@@ -107,7 +119,7 @@ Parsed with the stdlib `email` package. Headers, every `text/plain` and
 
 ---
 
-## 5. Damaged and truncated containers
+## 5. Incomplete and damaged files
 
 A zip's index lives at the *end* of the file, so a short download loses the
 index and every standard reader reports "not a zip file" for an otherwise
