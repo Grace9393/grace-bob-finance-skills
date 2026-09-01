@@ -1,18 +1,48 @@
-# Python files - Process Studio static scanner flags package names in .py files
-*.py
-skills/*/scripts/
-skills/*/tests/
-skills/*/src/
-skills/*/evals/
-skills/*/examples/
-skills/*/core/
-skills/*/templates/
-skills/*/requirements.txt
+# Skill bundles MUST ship their scripts, assets and data.
+#
+# Process Studio only executes scripts that live inside the skill bundle. A
+# skill published without them fails at run time with:
+#     Script invocation blocked: Skill file is outside the skill bundle
+#
+# This file previously excluded `*.py`, `skills/*/scripts/`, `skills/*/src/`,
+# `skills/*/requirements.txt`, `skills/*/tests/`, `skills/*/evals/`,
+# `skills/*/examples/`, `skills/*/core/` and `skills/*/templates/` -- the note
+# said it was to stop Process Studio flagging package-name strings in .py
+# files. The cost was that every affected skill shipped as documentation only
+# and could not run at all. A scanner warning is cheaper than a dead skill, so
+# those rules are gone.
+#
+# Keep out only genuine build output and OS clutter.
 
-# OS files
+# Python build artefacts (regenerated on first run)
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# JS dependencies (restored with npm install)
+node_modules/
+skills/*/node_modules/
+
+# Archives and large binaries do not belong in a skills repo
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+
+# OS and Drive clutter
 desktop.ini
 .DS_Store
 Thumbs.db
+*~
+*.tmp
+*.bak
+*.swp
 
-# Node modules
-node_modules/
+# Editor state
+.vscode/
+.idea/
