@@ -1,6 +1,6 @@
 /* ==========================================================================
    IBM Carbon report kit - behaviour
-   Lifted verbatim from the NBS Manila O2C artifact house format.
+   Lifted verbatim from the [CLIENT SITE] O2C artifact house format.
 
    Six progressive enhancements, all selector-driven - drop the file in and
    anything matching the selectors below animates. No dependencies, no CDN.

@@ -9,7 +9,7 @@ case can be defined. Three threads are built today, numbered 1–3, covering **2
 | 2 | **S2P** — Source-to-Pay | 16 | 59 | `source-to-pay.html` |
 | 3 | **OTC** — Order-to-Cash | 11 | 88 | `IBM_OTC_Golden_Thread_AI_Use_Cases.md`, `order-to-cash.html`, `OTC-3.7-Collections.md` |
 
-Sources live in `C:\Users\GRACEPAN\Box\#Grace\ClientZero\Studio`. The machine-readable taxonomy —
+Sources live in `C:\Users\GRACEPAN\Box\#Grace\[INTERNAL]\Studio`. The machine-readable taxonomy —
 every step with its section, thread, process-area mapping and assessment mapping — is
 `assets/golden-thread-taxonomy.csv`, generated from the prototype sources rather than retyped.
 

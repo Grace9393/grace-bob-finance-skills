@@ -34,7 +34,7 @@ The attached `ft-base-ontology.jsonld` is our practice's base ontology in the En
 2. Adjusting enum values inside `attributes` to the client's landscape (e.g. the client's actual ERP names in System usage notes, severity scales, cycle frequencies).
 3. Adding Operations (verbs) between entities — every Operation needs `from`, `to`, `precondition`, `postcondition`; a good ontology has 1.5–3× more Operations than Entities.
 4. Adding States only where a new entity has a real lifecycle; reference them from `hasState`, `initialState`, `terminalStates`.
-5. Modeling the CORPORATE MASTER LAYER alongside the finance layer, per our Heineken master-schema reference: `Executive` (from the org chart — jobTitle, LinkedIn where public), `Report` (from the financial statements — reportName, datePublished, temporalCoverage, pdfUrl), `Strategy` / `StrategicAction` (the named strategy framework), and `RegionalSubsidiary` (segments) — as Entities, connected with Operations like `CorporationHasExecutive`, `CorporationHasReport`, so the org chart and financial statements land as first-class graph members.
+5. Modeling the CORPORATE MASTER LAYER alongside the finance layer, per our [CLIENT] master-schema reference: `Executive` (from the org chart — jobTitle, LinkedIn where public), `Report` (from the financial statements — reportName, datePublished, temporalCoverage, pdfUrl), `Strategy` / `StrategicAction` (the named strategy framework), and `RegionalSubsidiary` (segments) — as Entities, connected with Operations like `CorporationHasExecutive`, `CorporationHasReport`, so the org chart and financial statements land as first-class graph members.
 6. Recording evidence in `description` fields by citing the CORPUS MANIFEST entry (title + URL) — the ontology stays class-level; instance data arrives later when Context Studio ingests the documents.
 
 HARD RULES (Context Studio import fails silently otherwise):
@@ -83,7 +83,7 @@ TASK: the attached `ft-base-ontology.jsonld` is our practice's base ontology in 
 2. Adjusting enum values inside `attributes` to the client's landscape.
 3. Adding Operations (verbs) between entities — every Operation needs `from`, `to`, `precondition`, `postcondition`; aim for 1.5–3× more Operations than Entities.
 4. Adding States only where a new entity has a real lifecycle; reference them from `hasState`, `initialState`, `terminalStates`.
-5. Modeling the CORPORATE MASTER LAYER alongside the finance layer, per our Heineken master-schema reference: `Executive` (from any org-chart / leadership documents in the corpus), `Report` (annual financial statements — reportName, datePublished, temporalCoverage, pdfUrl), `Strategy` / `StrategicAction`, and `RegionalSubsidiary` — as Entities with Operations like `CorporationHasExecutive`, `CorporationHasReport`.
+5. Modeling the CORPORATE MASTER LAYER alongside the finance layer, per our [CLIENT] master-schema reference: `Executive` (from any org-chart / leadership documents in the corpus), `Report` (annual financial statements — reportName, datePublished, temporalCoverage, pdfUrl), `Strategy` / `StrategicAction`, and `RegionalSubsidiary` — as Entities with Operations like `CorporationHasExecutive`, `CorporationHasReport`.
 6. Recording evidence in `description` fields by citing the manifest entry (file + source + URL) — the ontology stays class-level; instances arrive when Context Studio ingests these documents.
 
 HARD RULES (Context Studio import fails silently otherwise):

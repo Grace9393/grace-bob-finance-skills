@@ -226,7 +226,7 @@ If you add a ninth interaction that hides or zeroes something, extend `settle()`
 - **Not the real Carbon component library.** This is the token set and a hand-built
   component vocabulary, not `carbon-components`. A page that needs genuine Carbon
   widgets — data tables with sorting, toggles, tiles — is a different build, and
-  one such dashboard already exists in the Nestlé folder as the precedent.
+  one such dashboard already exists in the [CLIENT] folder as the precedent.
 - **Not dark-mode aware, deliberately.** These are printed and PDF'd. A dark variant
   would fork the palette for an audience that does not exist. Do not add
   `prefers-color-scheme` to `carbon-report.css`.

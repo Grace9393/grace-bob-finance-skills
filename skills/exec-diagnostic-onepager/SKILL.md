@@ -265,6 +265,6 @@ fragment cannot drift from its source; retyped prose drifts on the first edit.
 
 ## Reference
 
-`reference/worked-example.md` — the Nestlé Canada CA10 Returns & Refusals run:
+`reference/worked-example.md` — the [CLIENT] Canada CA10 Returns & Refusals run:
 four source reports to one sheet, the spine that was chosen and why, all seven
 checks, and the numbers each fix moved.

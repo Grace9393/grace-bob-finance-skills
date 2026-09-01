@@ -6,16 +6,16 @@
 
 ## Business proposal
 
-**Executive summary.** Clients know *what* has to be done; they don't know *how many people they actually have on it*. At Heineken and peers, effort is invisible: headcount lives in HR, cost in cost centers, work in projects and processes — never joined. We build a monthly pipeline that joins them, makes the **unallocated-FTE number** visible for the first time, and has an ICA agent narrate where effort went, what changed, and what to reallocate — with the evidence attached.
+**Executive summary.** Clients know *what* has to be done; they don't know *how many people they actually have on it*. At [CLIENT] and peers, effort is invisible: headcount lives in HR, cost in cost centers, work in projects and processes — never joined. We build a monthly pipeline that joins them, makes the **unallocated-FTE number** visible for the first time, and has an ICA agent narrate where effort went, what changed, and what to reallocate — with the evidence attached.
 
-**Client pain & evidence.** Direct from the current Heineken engagement: "they know what they need to do, but they don't know how many people they have and can't track it day to day." Every transformation baseline needs this and builds it manually, once, and it's stale in a month.
+**Client pain & evidence.** Direct from the current [CLIENT] engagement: "they know what they need to do, but they don't know how many people they have and can't track it day to day." Every transformation baseline needs this and builds it manually, once, and it's stale in a month.
 
 **Value.**
 - The invisibility number: unallocated FTE by cost center, monthly, automatic (today: a quarterly manual census, if at all).
 - Effort-vs-plan by process and project, with cost-per-FTE context.
 - Reallocation recommendations a transformation lead can act on, cited to the model.
 
-**Commercial angle.** Every operating-model and transformation engagement needs this baseline — it becomes a monthly-refresh asset we leave running (recurring value, not a one-time study). ClientZero: run on the sanitized Heineken structure we already work with.
+**Commercial angle.** Every operating-model and transformation engagement needs this baseline — it becomes a monthly-refresh asset we leave running (recurring value, not a one-time study). [INTERNAL]: run on the sanitized [CLIENT] structure we already work with.
 
 **2026 fit.** Recurring monthly usage by design; human reviews the narrative before it reaches the client; Bob + ICA + client extracts only.
 
@@ -44,7 +44,7 @@ Timesheets  ──┘        │                        │
 ```
 
 ### Build plan (challenge window)
-1. Day 1–2: extract formats agreed; `fte_model.py` against sanitized Heineken-shaped sample.
+1. Day 1–2: extract formats agreed; `fte_model.py` against sanitized [CLIENT]-shaped sample.
 2. Day 3–4: ontology extension (`CostCenter`, `FTEAllocation`) → Context Studio import (validator-gated).
 3. Day 5–6: narrative prompt via `executePrompt`; MCP tools registered in Bob.
 4. Day 7–8: monthly schedule (Task Scheduler) + deck render; run on two consecutive months of sample data to show deltas.

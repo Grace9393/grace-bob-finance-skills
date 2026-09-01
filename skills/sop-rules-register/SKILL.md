@@ -51,7 +51,7 @@ Use the `deep-extract` skill. Do not settle for body text.
 
 These corpora characteristically hide their content one to four levels down:
 outer `.docx` → `oleObject.bin` → `.msg` email → attached `.docx` / `.pptx`. On the
-Nestlé CA10 worked example the single most valuable file — a nine-column scenario
+[CLIENT] CA10 worked example the single most valuable file — a nine-column scenario
 decision matrix — sat at depth 4 inside an embedded training email.
 
 Extract **everything**, including:
@@ -197,7 +197,8 @@ coverage statement.
 
 ## Worked example
 
-`reference/nestle-ca10-rr.md` records the Nestlé Canada CA10 Returns & Refusals run:
-the source-integrity finding, the mining counts, the sixteen-rule spot check against an
+The worked example for this skill is a real client engagement -- the
+source-integrity finding, the mining counts, the sixteen-rule spot check against an
 earlier narrative-only report, and the reply drafted for the reviewer who asked for
-this depth in the first place.
+this depth. It is **not published in this repository**: it is client material and
+this repository is public. It lives with the engagement materials.

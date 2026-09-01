@@ -63,4 +63,4 @@ Live: business head asks Hank for a cut, reshapes it twice, then "what are my th
 ### Risks & mitigations
 - **Data quality:** Hank reports coverage gaps instead of guessing (tool returns row counts + nulls; persona forbids invented numbers).
 - **"EPM replacement?" objection:** No — advisor layer on top; PA/EPM where it exists, extracts where it doesn't (this is the answer the kickoff aligned on).
-- **Sensitivity:** sanitized ClientZero extract for the challenge; client deployments run inside their tenancy.
+- **Sensitivity:** sanitized [INTERNAL] extract for the challenge; client deployments run inside their tenancy.

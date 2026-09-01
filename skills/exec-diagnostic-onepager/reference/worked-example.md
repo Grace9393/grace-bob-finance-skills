@@ -1,4 +1,4 @@
-# Worked example — Nestlé Canada CA10 Returns & Refusals
+# Worked example — [CLIENT] Canada CA10 Returns & Refusals
 
 Four analysis reports to one A4 sheet, August 2026. Every number below is from
 the actual run, including the things that went wrong, because those are the part

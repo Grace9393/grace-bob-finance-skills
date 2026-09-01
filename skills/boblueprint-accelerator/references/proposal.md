@@ -10,7 +10,7 @@
 
 **Value.** Cycle time ~1 day+ → <1 hour per use case (~45 min for the blueprint draft); consistent house structure; each client schema becomes a compounding, reusable practice asset (asset-based consulting). Answers the "1,000 schemas in six months" scaling worry with one shared base ontology + validator-gated per-client extensions.
 
-**Commercial angle.** Directly accelerates every ICA-based engagement (Nestlé, Heineken pattern); the productivity story GMs already track (ICA adoption charts). No client prerequisite beyond what engagements already have.
+**Commercial angle.** Directly accelerates every ICA-based engagement ([CLIENT], [CLIENT] pattern); the productivity story GMs already track (ICA adoption charts). No client prerequisite beyond what engagements already have.
 
 **2026 fit.** The definitional case: everyday repeatable usage, only Bob + the three ICA studios, human-in-the-loop structural (approval gate inside the agent workflow).
 
@@ -38,7 +38,7 @@
 | Import-shape validator | `boblueprint/validate_ontology.py` |
 | One-shot Bob prompts (A: web-enabled; B: harvested corpus) | `boblueprint/step1-one-shot-prompts.md` |
 | Full pipeline runbook incl. ICA API automation | `watsonx-challenge-2026-build-kit.md` |
-| Reference outputs | `heineken-master-schema_test.jsonld`, `coca-cola-master-schema.jsonld` (ClientZero Studio) |
+| Reference outputs | `[CLIENT]-master-schema_test.jsonld`, `[CLIENT]-master-schema.jsonld` ([INTERNAL] Studio) |
 | Submission one-pager, deck, demo script | `watsonx-challenge-2026-merged-submission.*`, `-deck.pptx`, `-demo-script.md` |
 
 ### Demo & metric

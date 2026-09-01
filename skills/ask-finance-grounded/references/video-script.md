@@ -21,7 +21,7 @@
 **Tui:** "Watch the answer: accelerate collections, review payment terms, optimize inventory. All true. All useless — it's textbook advice that fits every company on earth, because the tool has never seen this company's quarter. When we tested the finance use cases internally, this is the wall every one of them hit. And the moment you try to fix it with real data, you hit the second wall: sensitivity and access."
 
 **[2 — 0:40] Architecture slide:**
-"So we built the grounded version — and made governance the product, not the afterthought. IBM Bob plus IBM Consulting Advantage: sanitize before anything moves, load into a tenant-isolated ICA document collection, answer only with citations from that collection — or refuse — and measure the grounding with an eval harness before anyone is allowed to demo it. Including us. Everything you're about to see runs on sanitized ClientZero data."
+"So we built the grounded version — and made governance the product, not the afterthought. IBM Bob plus IBM Consulting Advantage: sanitize before anything moves, load into a tenant-isolated ICA document collection, answer only with citations from that collection — or refuse — and measure the grounding with an eval harness before anyone is allowed to demo it. Including us. Everything you're about to see runs on sanitized [INTERNAL] data."
 
 **[3 — 1:10] Terminal:**
 "Step one, the scrubber Bob wrote: account numbers, IBANs, emails, names — redacted before upload, with counts per file so the data owner can verify." *(run; point at the printed total — say that number, never a rehearsed one)* "Step two: the quarter pack — close reports, AR aging, cash flow — into an ICA document collection. Tenant-isolated. The data never leaves governed storage, and there's a separate collection per role — the CFO view and the analyst view are different assistants."
@@ -43,4 +43,4 @@
 ---
 
 **Word count (spoken):** ~640 — rehearse to 4:30.
-**Pre-record checklist:** generic Ask Finance window ready (confirm nothing sensitive on screen); sanitized ClientZero quarter pack approved by data owner; golden set passing ≥80% the night before; the refusal question rehearsed; redaction-count output visible in beat 3.
+**Pre-record checklist:** generic Ask Finance window ready (confirm nothing sensitive on screen); sanitized [INTERNAL] quarter pack approved by data owner; golden set passing ≥80% the night before; the refusal question rehearsed; redaction-count output visible in beat 3.

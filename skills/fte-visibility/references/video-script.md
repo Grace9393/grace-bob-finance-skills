@@ -43,4 +43,4 @@
 ---
 
 **Word count (spoken):** ~600 — rehearse to 4:30.
-**Pre-record checklist:** two months of sanitized Heineken-shaped sample data; the reveal numbers verified against the actual run (current sample: 879 total / 424 in the six dark cost centers — regenerate if the seed changes); MCP tools registered for beat 4; narrative pre-generated for beat 5 (label if shown at speed).
+**Pre-record checklist:** two months of sanitized [CLIENT]-shaped sample data; the reveal numbers verified against the actual run (current sample: 879 total / 424 in the six dark cost centers — regenerate if the seed changes); MCP tools registered for beat 4; narrative pre-generated for beat 5 (label if shown at speed).
