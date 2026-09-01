@@ -1,0 +1,454 @@
+{
+  "@context": {
+    "ft": "http://ibm.com/consulting/finance-transformation#",
+    "schema": "http://schema.org/",
+    "id": "@id",
+    "type": "@type",
+    "name": "schema:name",
+    "description": "schema:description",
+    "attributes": "ft:attributes",
+    "identityKey": "ft:identityKey",
+    "humanRef": "ft:humanRef",
+    "invariant": "ft:invariant",
+    "hasState": { "@id": "ft:hasState", "@type": "@id" },
+    "initialState": { "@id": "ft:initialState", "@type": "@id" },
+    "terminalStates": { "@id": "ft:terminalStates", "@type": "@id" },
+    "relatesTo": { "@id": "ft:relatesTo", "@type": "@id" },
+    "emitsEvent": { "@id": "ft:emitsEvent", "@type": "@id" },
+    "from": { "@id": "ft:from", "@type": "@id" },
+    "to": { "@id": "ft:to", "@type": "@id" },
+    "precondition": "ft:precondition",
+    "postcondition": "ft:postcondition",
+    "Entity": "ft:Entity",
+    "Operation": "ft:Operation",
+    "State": "ft:State"
+  },
+  "@graph": [
+    {
+      "id": "ft:ProcessArea",
+      "type": "Entity",
+      "name": "ProcessArea",
+      "description": "A finance process area or sub-process in engagement scope, aligned to the APQC PCF where possible (e.g. R2R close, OTC 3.10 Adjustment & Credit Administration, project accounting)",
+      "identityKey": "processAreaId: UUID",
+      "humanRef": "apqcRef",
+      "attributes": {
+        "processAreaId": "string",
+        "apqcRef": "string|null",
+        "cycleFrequency": "DAILY|WEEKLY|MONTHLY|QUARTERLY|ANNUAL|CONTINUOUS"
+      },
+      "invariant": ["apqcRef must match an APQC PCF code when one exists for the process"],
+      "relatesTo": ["ft:Persona", "ft:PainPoint", "ft:Agent", "ft:Blueprint"]
+    },
+    {
+      "id": "ft:Persona",
+      "type": "Entity",
+      "name": "Persona",
+      "description": "A named role in the client's finance organization that owns or works a process area (e.g. Mara Santos — Rebate & Credit Administration Lead)",
+      "identityKey": "personaId: UUID",
+      "humanRef": "roleTitle",
+      "attributes": {
+        "personaId": "string",
+        "roleTitle": "string",
+        "seniority": "ANALYST|LEAD|MANAGER|HEAD|CXO"
+      },
+      "invariant": ["personaId must be unique", "each Persona must own or work at least one ProcessArea"],
+      "relatesTo": ["ft:ProcessArea", "ft:PainPoint", "ft:UserBenefit"]
+    },
+    {
+      "id": "ft:System",
+      "type": "Entity",
+      "name": "System",
+      "description": "A system of record or engagement in the client landscape (ERP, workflow, reporting, ticketing, data platform)",
+      "identityKey": "systemId: UUID",
+      "humanRef": "systemName",
+      "attributes": {
+        "systemId": "string",
+        "systemName": "string",
+        "systemType": "ERP|WORKFLOW|REPORTING|TICKETING|DATA_PLATFORM|OTHER",
+        "vendor": "string|null"
+      },
+      "invariant": ["systemName must be unique within the client landscape"],
+      "relatesTo": ["ft:DataObject", "ft:Agent", "ft:PainPoint"]
+    },
+    {
+      "id": "ft:DataObject",
+      "type": "Entity",
+      "name": "DataObject",
+      "description": "A business data object flowing between systems and consumed or produced by agents (e.g. journal entry, credit memo, exception ticket, variance report)",
+      "identityKey": "dataObjectId: UUID",
+      "humanRef": "objectName",
+      "attributes": {
+        "dataObjectId": "string",
+        "objectName": "string",
+        "sensitivity": "PUBLIC|INTERNAL|CONFIDENTIAL|REGULATED"
+      },
+      "invariant": ["a REGULATED DataObject may only be consumed by an Agent whose approvalRequired is true"],
+      "relatesTo": ["ft:System", "ft:Agent"]
+    },
+    {
+      "id": "ft:PainPoint",
+      "type": "Entity",
+      "name": "PainPoint",
+      "description": "A concrete current-state pain point tied to a process, a persona, and usually a system (e.g. 'Manual capitalization decisions create delays and misclassification risk')",
+      "identityKey": "painPointId: UUID",
+      "humanRef": "painPointCode",
+      "attributes": {
+        "painPointId": "string",
+        "painPointCode": "string",
+        "severity": "LOW|MEDIUM|HIGH|CRITICAL",
+        "frequency": "string",
+        "rootCause": "string|null"
+      },
+      "invariant": [
+        "every PainPoint must occur in at least one ProcessArea and affect at least one Persona",
+        "every PainPoint must be evidenced by at least one EvidenceSource"
+      ],
+      "hasState": ["ft:PainPointIdentified", "ft:PainPointAddressed", "ft:PainPointResolved"],
+      "initialState": "ft:PainPointIdentified",
+      "terminalStates": ["ft:PainPointResolved"],
+      "relatesTo": ["ft:ProcessArea", "ft:Persona", "ft:System", "ft:EvidenceSource", "ft:Agent"]
+    },
+    {
+      "id": "ft:Agent",
+      "type": "Entity",
+      "name": "Agent",
+      "description": "A candidate AI agent in the target state, addressing one or more pain points under defined human oversight",
+      "identityKey": "agentId: UUID",
+      "humanRef": "agentName",
+      "attributes": {
+        "agentId": "string",
+        "agentName": "string",
+        "autonomyLevel": "ASSISTED|SUPERVISED|AUTONOMOUS",
+        "approvalRequired": "boolean",
+        "triggerType": "EVENT|SCHEDULE|REQUEST"
+      },
+      "invariant": [
+        "every Agent must escalate to at least one Persona (human-in-the-loop)",
+        "every Agent must address at least one PainPoint"
+      ],
+      "hasState": ["ft:AgentProposed", "ft:AgentValidated", "ft:AgentDeployed", "ft:AgentRetired"],
+      "initialState": "ft:AgentProposed",
+      "terminalStates": ["ft:AgentRetired"],
+      "relatesTo": ["ft:PainPoint", "ft:ProcessArea", "ft:System", "ft:DataObject", "ft:Persona", "ft:UserBenefit", "ft:BusinessBenefit"]
+    },
+    {
+      "id": "ft:UserBenefit",
+      "type": "Entity",
+      "name": "UserBenefit",
+      "description": "A benefit experienced by a specific persona when an agent takes over or assists a task (framed by stakeholder role)",
+      "identityKey": "userBenefitId: UUID",
+      "humanRef": "benefitStatement",
+      "attributes": {
+        "userBenefitId": "string",
+        "benefitStatement": "string",
+        "metric": "string|null"
+      },
+      "invariant": ["every UserBenefit must accrue to exactly one Persona"],
+      "relatesTo": ["ft:Persona", "ft:Agent"]
+    },
+    {
+      "id": "ft:BusinessBenefit",
+      "type": "Entity",
+      "name": "BusinessBenefit",
+      "description": "An enterprise-level benefit, framed as risk-reduction, cycle-acceleration, governance, or scalability",
+      "identityKey": "businessBenefitId: UUID",
+      "humanRef": "benefitStatement",
+      "attributes": {
+        "businessBenefitId": "string",
+        "benefitStatement": "string",
+        "benefitType": "RISK_REDUCTION|CYCLE_ACCELERATION|GOVERNANCE|SCALABILITY",
+        "targetMetric": "string|null"
+      },
+      "invariant": ["benefitType must be one of the four practice framing categories"],
+      "relatesTo": ["ft:Agent", "ft:EvidenceSource"]
+    },
+    {
+      "id": "ft:EvidenceSource",
+      "type": "Entity",
+      "name": "EvidenceSource",
+      "description": "A research corpus document backing a claim — registered in the harvest manifest (annual report, analyst reprint, interview notes, benchmark)",
+      "identityKey": "evidenceId: UUID",
+      "humanRef": "sourceTitle",
+      "attributes": {
+        "evidenceId": "string",
+        "sourceTitle": "string",
+        "sourceType": "ANNUAL_REPORT|ANALYST_REPORT|OFFICIAL_SITE|INTERVIEW|BENCHMARK",
+        "url": "string|null",
+        "accessedDate": "string"
+      },
+      "invariant": ["every EvidenceSource must correspond to an entry in the harvest manifest.json"],
+      "relatesTo": ["ft:PainPoint", "ft:BusinessBenefit"]
+    },
+    {
+      "id": "ft:Blueprint",
+      "type": "Entity",
+      "name": "Blueprint",
+      "description": "The use-case blueprint deliverable itself — cognitive decomposition, agent register, target operating model, and narrative for a process area",
+      "identityKey": "blueprintId: UUID",
+      "humanRef": "blueprintTitle",
+      "attributes": {
+        "blueprintId": "string",
+        "blueprintTitle": "string",
+        "version": "string",
+        "cycleTimeMinutes": "integer|null"
+      },
+      "invariant": ["a Blueprint may only reach SignedOff after every FLAG from the ICA pressure-test is resolved"],
+      "hasState": ["ft:BlueprintDraft", "ft:BlueprintInReview", "ft:BlueprintSignedOff"],
+      "initialState": "ft:BlueprintDraft",
+      "terminalStates": ["ft:BlueprintSignedOff"],
+      "relatesTo": ["ft:ProcessArea", "ft:Agent"]
+    },
+
+    {
+      "id": "ft:OwnsProcess",
+      "type": "Operation",
+      "name": "OwnsProcess",
+      "description": "Establishes that a persona owns or works a process area",
+      "from": "ft:Persona",
+      "to": "ft:ProcessArea",
+      "precondition": ["Persona must exist", "ProcessArea must exist"],
+      "postcondition": ["ProcessArea has an accountable Persona"]
+    },
+    {
+      "id": "ft:ParentOf",
+      "type": "Operation",
+      "name": "ParentOf",
+      "description": "Nests a sub-process under its parent process area (APQC hierarchy)",
+      "from": "ft:ProcessArea",
+      "to": "ft:ProcessArea",
+      "precondition": ["both ProcessAreas must exist", "child must not already have a different parent"],
+      "postcondition": ["ProcessArea hierarchy reflects the APQC decomposition"]
+    },
+    {
+      "id": "ft:OccursIn",
+      "type": "Operation",
+      "name": "OccursIn",
+      "description": "Locates a pain point in a process area",
+      "from": "ft:PainPoint",
+      "to": "ft:ProcessArea",
+      "precondition": ["PainPoint must exist", "ProcessArea must exist"],
+      "postcondition": ["PainPoint is scoped to a ProcessArea"]
+    },
+    {
+      "id": "ft:AffectsPersona",
+      "type": "Operation",
+      "name": "AffectsPersona",
+      "description": "Records which persona suffers a pain point",
+      "from": "ft:PainPoint",
+      "to": "ft:Persona",
+      "precondition": ["PainPoint must exist", "Persona must exist"],
+      "postcondition": ["PainPoint has at least one affected Persona"]
+    },
+    {
+      "id": "ft:ManifestsIn",
+      "type": "Operation",
+      "name": "ManifestsIn",
+      "description": "Records the system where a pain point shows up (manual workaround, swivel-chair, shadow spreadsheet)",
+      "from": "ft:PainPoint",
+      "to": "ft:System",
+      "precondition": ["PainPoint must exist", "System must exist"],
+      "postcondition": ["PainPoint is traceable to a system touchpoint"]
+    },
+    {
+      "id": "ft:EvidencedBy",
+      "type": "Operation",
+      "name": "EvidencedBy",
+      "description": "Backs a pain point with a research corpus document from the harvest manifest",
+      "from": "ft:PainPoint",
+      "to": "ft:EvidenceSource",
+      "precondition": ["PainPoint must exist", "EvidenceSource must exist in the harvest manifest"],
+      "postcondition": ["PainPoint claim is citable to source, URL, and access date"]
+    },
+    {
+      "id": "ft:Addresses",
+      "type": "Operation",
+      "name": "Addresses",
+      "description": "Maps a candidate agent to the pain point it resolves; moves the PainPoint toward Addressed",
+      "from": "ft:Agent",
+      "to": "ft:PainPoint",
+      "precondition": ["Agent must exist", "PainPoint must be in Identified state"],
+      "postcondition": ["PainPoint transitions to Addressed once the Agent is Validated"]
+    },
+    {
+      "id": "ft:OperatesIn",
+      "type": "Operation",
+      "name": "OperatesIn",
+      "description": "Scopes an agent to the process area it works in",
+      "from": "ft:Agent",
+      "to": "ft:ProcessArea",
+      "precondition": ["Agent must exist", "ProcessArea must exist"],
+      "postcondition": ["Agent is scoped to a ProcessArea in the blueprint's decomposition"]
+    },
+    {
+      "id": "ft:RequiresAccessTo",
+      "type": "Operation",
+      "name": "RequiresAccessTo",
+      "description": "Declares the system access an agent needs to act",
+      "from": "ft:Agent",
+      "to": "ft:System",
+      "precondition": ["Agent must exist", "System must exist"],
+      "postcondition": ["Agent's system access requirements are explicit for governance review"]
+    },
+    {
+      "id": "ft:Consumes",
+      "type": "Operation",
+      "name": "Consumes",
+      "description": "Declares a data object an agent reads as input",
+      "from": "ft:Agent",
+      "to": "ft:DataObject",
+      "precondition": ["Agent must exist", "DataObject must exist", "if DataObject is REGULATED, Agent.approvalRequired must be true"],
+      "postcondition": ["Agent input contract includes the DataObject"]
+    },
+    {
+      "id": "ft:Produces",
+      "type": "Operation",
+      "name": "Produces",
+      "description": "Declares a data object an agent writes as output",
+      "from": "ft:Agent",
+      "to": "ft:DataObject",
+      "precondition": ["Agent must exist", "DataObject must exist"],
+      "postcondition": ["Agent output contract includes the DataObject"]
+    },
+    {
+      "id": "ft:StoredIn",
+      "type": "Operation",
+      "name": "StoredIn",
+      "description": "Locates a data object in its system of record",
+      "from": "ft:DataObject",
+      "to": "ft:System",
+      "precondition": ["DataObject must exist", "System must exist"],
+      "postcondition": ["DataObject has a system of record"]
+    },
+    {
+      "id": "ft:EscalatesTo",
+      "type": "Operation",
+      "name": "EscalatesTo",
+      "description": "The human-in-the-loop contract: the persona who approves or takes over when the agent pauses at a checkpoint",
+      "from": "ft:Agent",
+      "to": "ft:Persona",
+      "precondition": ["Agent must exist", "Persona must exist"],
+      "postcondition": ["Agent has a defined human approval point — required before it can be Validated"]
+    },
+    {
+      "id": "ft:DeliversUserBenefit",
+      "type": "Operation",
+      "name": "DeliversUserBenefit",
+      "description": "Links an agent to a persona-level benefit it creates",
+      "from": "ft:Agent",
+      "to": "ft:UserBenefit",
+      "precondition": ["Agent must exist", "UserBenefit must exist"],
+      "postcondition": ["Agent's value story includes the UserBenefit"]
+    },
+    {
+      "id": "ft:AccruesTo",
+      "type": "Operation",
+      "name": "AccruesTo",
+      "description": "Assigns a user benefit to the persona who experiences it",
+      "from": "ft:UserBenefit",
+      "to": "ft:Persona",
+      "precondition": ["UserBenefit must exist", "Persona must exist"],
+      "postcondition": ["UserBenefit is framed by stakeholder role"]
+    },
+    {
+      "id": "ft:DeliversBusinessBenefit",
+      "type": "Operation",
+      "name": "DeliversBusinessBenefit",
+      "description": "Links an agent to an enterprise-level benefit it creates",
+      "from": "ft:Agent",
+      "to": "ft:BusinessBenefit",
+      "precondition": ["Agent must exist", "BusinessBenefit must exist"],
+      "postcondition": ["Agent's business case includes the BusinessBenefit"]
+    },
+    {
+      "id": "ft:SupportedBy",
+      "type": "Operation",
+      "name": "SupportedBy",
+      "description": "Backs a business benefit with benchmark or analyst evidence from the harvest manifest",
+      "from": "ft:BusinessBenefit",
+      "to": "ft:EvidenceSource",
+      "precondition": ["BusinessBenefit must exist", "EvidenceSource must exist in the harvest manifest"],
+      "postcondition": ["BusinessBenefit claim is citable for the client conversation"]
+    },
+    {
+      "id": "ft:Covers",
+      "type": "Operation",
+      "name": "Covers",
+      "description": "Scopes a blueprint deliverable to the process areas it documents",
+      "from": "ft:Blueprint",
+      "to": "ft:ProcessArea",
+      "precondition": ["Blueprint must exist", "ProcessArea must exist"],
+      "postcondition": ["Blueprint scope is explicit"]
+    },
+    {
+      "id": "ft:Specifies",
+      "type": "Operation",
+      "name": "Specifies",
+      "description": "Registers an agent in a blueprint's agent register",
+      "from": "ft:Blueprint",
+      "to": "ft:Agent",
+      "precondition": ["Blueprint must exist", "Agent must exist", "Agent must have an EscalatesTo Persona"],
+      "postcondition": ["Agent appears in the Blueprint's agent register with its human approval point"]
+    },
+
+    {
+      "id": "ft:PainPointIdentified",
+      "type": "State",
+      "name": "PainPointIdentified",
+      "description": "Pain point documented and evidenced, not yet addressed by any agent"
+    },
+    {
+      "id": "ft:PainPointAddressed",
+      "type": "State",
+      "name": "PainPointAddressed",
+      "description": "A validated agent addresses this pain point in the target-state design"
+    },
+    {
+      "id": "ft:PainPointResolved",
+      "type": "State",
+      "name": "PainPointResolved",
+      "description": "Deployed agent measurably resolves the pain point"
+    },
+    {
+      "id": "ft:AgentProposed",
+      "type": "State",
+      "name": "AgentProposed",
+      "description": "Candidate agent drafted from the pain-point analysis, not yet pressure-tested"
+    },
+    {
+      "id": "ft:AgentValidated",
+      "type": "State",
+      "name": "AgentValidated",
+      "description": "Agent design passed the ICA method pressure-test, human approval point defined"
+    },
+    {
+      "id": "ft:AgentDeployed",
+      "type": "State",
+      "name": "AgentDeployed",
+      "description": "Agent running in the client landscape under its escalation contract"
+    },
+    {
+      "id": "ft:AgentRetired",
+      "type": "State",
+      "name": "AgentRetired",
+      "description": "Agent decommissioned or superseded"
+    },
+    {
+      "id": "ft:BlueprintDraft",
+      "type": "State",
+      "name": "BlueprintDraft",
+      "description": "First draft generated by the accelerator, awaiting review"
+    },
+    {
+      "id": "ft:BlueprintInReview",
+      "type": "State",
+      "name": "BlueprintInReview",
+      "description": "Senior consultant reviewing; ICA pressure-test FLAGs being resolved"
+    },
+    {
+      "id": "ft:BlueprintSignedOff",
+      "type": "State",
+      "name": "BlueprintSignedOff",
+      "description": "Blueprint approved for the client conversation"
+    }
+  ]
+}

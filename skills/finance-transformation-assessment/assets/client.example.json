@@ -1,0 +1,17 @@
+{
+  "client_name": "Acme Consumer Goods",
+  "ticker": "ACME",
+  "official_domain": "https://www.acme-cg.com",
+  "official_pages": [
+    "https://www.acme-cg.com/about",
+    "https://www.acme-cg.com/investors",
+    "https://www.acme-cg.com/annual-report"
+  ],
+  "annual_report_pdf_url": "",
+  "analyst_reprint_urls": [
+    "https://www.vendor-example.com/gartner-magic-quadrant-reprint-2026"
+  ],
+  "extra_urls": [],
+  "sec_contact_email": "your.name@ibm.com",
+  "out_dir": "inputs/research/acme"
+}
