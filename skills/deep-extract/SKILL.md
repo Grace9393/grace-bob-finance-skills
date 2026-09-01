@@ -1,6 +1,6 @@
 ---
 name: deep-extract
-description: Recursively extract every scrap of content from a document — including the files embedded inside it. Pulls body text, tables, headers/footers, footnotes, comments, tracked changes and properties out of docx/xlsx/pptx/pdf, then descends into every OLE object, .msg attachment, package stream and nested archive to arbitrary depth, salvaging truncated containers along the way. Use when the user asks to extract, read, dump, unpack, mine or "get everything out of" a document, mentions embedded/attached/nested files, icons inside a Word file, attachments inside attachments, an SOP or procedure doc with objects in it, or when a document must be reviewed in full and the visible text is only part of it.
+description: Recursively extract the full content of a document — including the files embedded inside it. Pulls body text, tables, headers/footers, footnotes, comments, tracked changes and properties out of docx/xlsx/pptx/pdf, then descends through embedded objects, .msg attachments and package streams to a bounded depth (8 levels by default, set with --max-depth), recovering readable entries from damaged containers. Use when the user asks to extract, read, dump, unpack, mine or "get everything out of" a document, mentions embedded/attached/nested files, icons inside a Word file, attachments inside attachments, an SOP or procedure doc with objects in it, or when a document must be reviewed in full and the visible text is only part of it.
 ---
 
 # Deep extract — conduct guide

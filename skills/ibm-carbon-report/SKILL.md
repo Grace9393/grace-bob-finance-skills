@@ -169,7 +169,7 @@ Then look at it: print preview at A4, and the page at 1280px and 375px wide.
 **If the page count matters, render it — do not estimate it.**
 
 ```
-python scripts/check_print.py OUTPUT.html --pages 1
+python qa/check_print.py OUTPUT.html --pages 1
 ```
 
 It prints the file through headless Chrome and counts what comes out, then checks
@@ -230,3 +230,10 @@ If you add a ninth interaction that hides or zeroes something, extend `settle()`
 - **Not dark-mode aware, deliberately.** These are printed and PDF'd. A dark variant
   would fork the palette for an audience that does not exist. Do not add
   `prefers-color-scheme` to `carbon-report.css`.
+
+> **Note on `qa/`** — the scripts in `qa/` need a real browser (playwright) or
+> an HTML parser (bs4) and cannot run inside the Process Studio sandbox, which
+> disables a whole skill when a script in `scripts/` names a package its runtime
+> lacks. They are author-side proofs, so they live in `qa/` and are run locally:
+> `pip install playwright pypdf beautifulsoup4 && playwright install chromium`.
+> Everything in `scripts/` runs anywhere.

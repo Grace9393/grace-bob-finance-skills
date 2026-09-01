@@ -268,3 +268,10 @@ fragment cannot drift from its source; retyped prose drifts on the first edit.
 `reference/worked-example.md` — the [CLIENT] Canada CA10 Returns & Refusals run:
 four source reports to one sheet, the spine that was chosen and why, all seven
 checks, and the numbers each fix moved.
+
+> **Note on `qa/`** — the scripts in `qa/` need a real browser (playwright) or
+> an HTML parser (bs4) and cannot run inside the Process Studio sandbox, which
+> disables a whole skill when a script in `scripts/` names a package its runtime
+> lacks. They are author-side proofs, so they live in `qa/` and are run locally:
+> `pip install playwright pypdf beautifulsoup4 && playwright install chromium`.
+> Everything in `scripts/` runs anywhere.
