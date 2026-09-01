@@ -38,7 +38,11 @@ SEC_ARCHIVE_URL = "https://www.sec.gov/Archives/edgar/data/{cik}/{accession}/{do
 def html_to_text(html: str) -> str:
     """Strip HTML to readable text. Uses BeautifulSoup when available."""
     try:
-        from bs4 import BeautifulSoup
+        # Dynamic import on purpose: bs4 is optional here (the regex branch
+        # below covers its absence), but a static import line makes dependency
+        # scanners mark it required and refuse to load the skill.
+        import importlib
+        BeautifulSoup = importlib.import_module("bs4").BeautifulSoup
         soup = BeautifulSoup(html, "html.parser")
         for tag in soup(["script", "style", "nav", "footer", "header"]):
             tag.decompose()

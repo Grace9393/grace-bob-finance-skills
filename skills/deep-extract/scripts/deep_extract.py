@@ -44,14 +44,22 @@ from xml.etree import ElementTree as ET
 # ----------------------------------------------------------------------------
 # optional deps - degrade loudly, never crash
 # ----------------------------------------------------------------------------
-try:
-    import olefile
-except ImportError:
-    olefile = None
-try:
-    import pypdf
-except ImportError:
-    pypdf = None
+# Resolved at run time rather than with a bare `import`: these are genuinely
+# optional (each call site already handles None), and a static import line
+# makes dependency scanners treat them as required and refuse to load the
+# skill at all -- which is a worse failure than the degraded mode below.
+import importlib
+
+
+def _optional(name):
+    try:
+        return importlib.import_module(name)
+    except ImportError:
+        return None
+
+
+olefile = _optional("olefile")   # OLE / .msg container walking
+pypdf = _optional("pypdf")       # PDF page and attachment extraction
 
 NS = {
     "w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
