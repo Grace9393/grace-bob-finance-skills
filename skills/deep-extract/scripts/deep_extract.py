@@ -1084,6 +1084,15 @@ class Extractor:
         self.used_paths.add(rel)
 
         full = os.path.join(self.outdir, rel)
+        # Containment guard. `rel` is built from names that came out of the
+        # container being extracted, i.e. attacker-controllable. as_relpath()
+        # already neutralises every "..", "." and empty segment, but that is a
+        # property of one code path; this check is a property of every write.
+        # Resolve both sides and refuse anything that lands outside outdir.
+        root = os.path.realpath(self.outdir)
+        resolved = os.path.realpath(full)
+        if os.path.commonpath([root, resolved]) != root:
+            raise ValueError("refusing to write outside the output directory: %r" % rel)
         os.makedirs(long_path(os.path.dirname(full)), exist_ok=True)
         if encoding:
             with io.open(long_path(full), mode, encoding=encoding) as fh:
