@@ -269,12 +269,8 @@ fragment cannot drift from its source; retyped prose drifts on the first edit.
 four source reports to one sheet, the spine that was chosen and why, all seven
 checks, and the numbers each fix moved.
 
-> **Author-side QA tools.** The audit and print-check scripts for this skill
-> live at `tooling/exec-diagnostic-onepager/` in the repository root — *outside*
-> the `skills/` folder that Process Studio connects to. They need a real browser
-> (playwright) or an HTML parser (bs4), which the platform runtime does not
-> provide, and it disables a whole skill when any file in the bundle imports a
-> package it lacks. Run them locally: `pip install playwright pypdf
-> beautifulsoup4 && playwright install chromium`, then
-> `python tooling/exec-diagnostic-onepager/<script>.py`. Everything under
-> `scripts/` runs anywhere.
+> **Author-side QA tools.** This skill's audit scripts live at
+> `tooling/exec-diagnostic-onepager/` in the repository root, outside the folder Process
+> Studio connects to, because they drive a browser or parse HTML and cannot
+> run in that sandbox. See `tooling/exec-diagnostic-onepager/README.md` to run them
+> locally. Everything under `scripts/` runs anywhere.

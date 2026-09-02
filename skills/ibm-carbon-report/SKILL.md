@@ -231,13 +231,8 @@ If you add a ninth interaction that hides or zeroes something, extend `settle()`
   would fork the palette for an audience that does not exist. Do not add
   `prefers-color-scheme` to `carbon-report.css`.
 
-> **Author-side QA tools.** `check_print.py` and its dependencies
-> (`requirements.txt`: playwright, pypdf) live at `tooling/ibm-carbon-report/`
-> in the repository root — *outside* the `skills/` folder Process Studio
-> connects to. The platform treats a `requirements.txt` inside a skill as a
-> hard dependency declaration and disables the skill when its runtime lacks
-> any listed package; these are only needed for the local print check. Run it
-> locally: `pip install -r tooling/ibm-carbon-report/requirements.txt &&
-> playwright install chromium`, then
-> `python tooling/ibm-carbon-report/check_print.py OUTPUT.html --pages 1`.
-> `scripts/check_report.py` needs nothing and runs anywhere.
+> **Author-side QA tools.** This skill's audit scripts live at
+> `tooling/ibm-carbon-report/` in the repository root, outside the folder Process
+> Studio connects to, because they drive a browser or parse HTML and cannot
+> run in that sandbox. See `tooling/ibm-carbon-report/README.md` to run them
+> locally. Everything under `scripts/` runs anywhere.
