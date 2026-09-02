@@ -231,18 +231,13 @@ If you add a ninth interaction that hides or zeroes something, extend `settle()`
   would fork the palette for an audience that does not exist. Do not add
   `prefers-color-scheme` to `carbon-report.css`.
 
-> **Note on `tooling/ibm-carbon-report/`** — the scripts in `tooling/ibm-carbon-report/` need a real browser (playwright) or
-> an HTML parser (bs4) and cannot run inside the Process Studio sandbox, which
-> disables a whole skill when a script in `scripts/` names a package its runtime
-> lacks. They are author-side proofs, so they live in `tooling/ibm-carbon-report/` and are run locally:
-> `pip install playwright pypdf beautifulsoup4 && playwright install chromium`.
-> Everything in `scripts/` runs anywhere.
-
-> **Author-side QA tools.** The audit and print-check scripts for this skill
-> live at `tooling/ibm-carbon-report/` in the repository root — *outside* the `skills/`
-> folder that Process Studio connects to. They need a real browser (playwright)
-> or an HTML parser (bs4), which the platform runtime does not provide, and it
-> disables a whole skill when any file in the bundle imports a package it lacks.
-> Run them locally: `pip install playwright pypdf beautifulsoup4 && playwright
-> install chromium`, then `python tooling/ibm-carbon-report/<script>.py`. Everything under
-> `scripts/` runs anywhere.
+> **Author-side QA tools.** `check_print.py` and its dependencies
+> (`requirements.txt`: playwright, pypdf) live at `tooling/ibm-carbon-report/`
+> in the repository root — *outside* the `skills/` folder Process Studio
+> connects to. The platform treats a `requirements.txt` inside a skill as a
+> hard dependency declaration and disables the skill when its runtime lacks
+> any listed package; these are only needed for the local print check. Run it
+> locally: `pip install -r tooling/ibm-carbon-report/requirements.txt &&
+> playwright install chromium`, then
+> `python tooling/ibm-carbon-report/check_print.py OUTPUT.html --pages 1`.
+> `scripts/check_report.py` needs nothing and runs anywhere.
